@@ -19,7 +19,7 @@
 .nasa h1, .nasa h3 {
     margin: 1rem auto;
     padding: 0.4rem;
-    background-color: rgba( 5, 5, 5, 0.3 );
+    background-color: rgba( 5, 5, 5, 0.5 );
 }
 
 .nasa .explanation {
@@ -27,10 +27,11 @@
     position: fixed;
     bottom: 3rem;
     left: calc(50% - 30%);
-    background-color: rgba( 5, 5, 5, 0.3 );
+    background-color: rgba( 5, 5, 5, 0.5 );
 }
 
 .nasa .explanation p {
-    padding: 2rem;
+    padding: 0.2rem;
     line-height: 1.5rem;
+    text-align: start;
 }
