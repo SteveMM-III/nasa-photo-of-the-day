@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 
 const StyledContainer = styled.div`
     width: 100vw;
