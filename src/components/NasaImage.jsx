@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
+import styled from 'styled-components';
 import axios from 'axios';
 
-import styled from 'styled-components';
-
+// Styled components used in the custom NasaImage component below
 const StyledContainer = styled.div`
     width: 100vw;
     height: 100vh;
@@ -48,13 +48,13 @@ const StyledInfo = styled.div`
         cursor: pointer;
     }
 
-    ${props => {
-        if (props.toggle) {
+    ${props => {  // set up the toggle that is set by the onClick on line 118
+        if (props.toggle) { // if true
             return `
                 width: 60%;
                 left: 20%;
             `;
-        } else {
+        } else {            // if false
             return `
                 left: calc(50% - 2rem);
             `;
@@ -65,12 +65,12 @@ const StyledInfo = styled.div`
 const StyledH4 = styled.h4`
     width: 100%;
     margin: 0;
-    ${props => {
-        if (props.toggle) {
+    ${props => {  // set up the toggle that is set by the onClick on line 119
+        if (props.toggle) { // if true
             return `
                 display: block;
             `;
-        } else {
+        } else {            // if false
             return `
                 display: none;
             `;
@@ -80,12 +80,12 @@ const StyledH4 = styled.h4`
 
 const StyledP = styled.p`
     text-align: start;
-    ${props => {
-        if (props.toggle) {
+    ${props => {  // set up the toggle that is set by the onClick on line 120
+        if (props.toggle) { // if true
             return `
                 display: block;
             `;
-        } else {
+        } else {            // if false
             return `
                 display: none;
             `;
@@ -95,12 +95,14 @@ const StyledP = styled.p`
 
 export default function NasaImage() {
 
+    // Component States
     const [imgInfo,   setImgInfo  ] = useState( {}  );
     const [infoWidth, setInfoWidth] = useState(false);
     const [showH4,    setShowH4   ] = useState(true );
     const [showInfo,  setShowInfo ] = useState(false);
 
-    useEffect(() => {
+    // Get request to request info from NASA API, stored in imgInfo usestate
+    useEffect( () => {
         axios.get( 'https://api.nasa.gov/planetary/apod?api_key=DEMO_KEY' )
         .then( response => { setImgInfo( response.data ); } )
         .catch( err => {
@@ -108,16 +110,18 @@ export default function NasaImage() {
         } );
     }, [] );
 
+    // return component
     return (
+        // all the {imgInfo.something} below is pulled from the axios.get call above
         <StyledContainer>
-            <StyledImg alt='space' src={ imgInfo.hdurl } />
+            <StyledImg alt='nasa hd image of the day' src={ imgInfo.hdurl } />
             <StyledH1>{ imgInfo.title }</StyledH1>
             <StyledH3>{ imgInfo.date  }</StyledH3>
-            <StyledInfo toggle={ infoWidth }
+            <StyledInfo toggle={ infoWidth }        // watch infoWidth useState for change
                 onClick={ () => {
-                    setInfoWidth(!infoWidth);
-                    setShowH4(!showH4);
-                    setShowInfo(!showInfo);
+                    setInfoWidth(!infoWidth);       // toggle true/false
+                    setShowH4(!showH4);             // toggle true/false
+                    setShowInfo(!showInfo);         // toggle true/false
                 } } >
                 <StyledH4 toggle={ showH4 }>INFO</StyledH4>
                 <StyledP toggle={ showInfo }>{imgInfo.explanation}</StyledP>
@@ -125,3 +129,13 @@ export default function NasaImage() {
         </StyledContainer>
     );
 }
+
+/*
+    I tried putting the following comments on the lines above, but for whatever reason
+    the comments were being rendered in the html. Rather than remove them completely,
+    I've moved them here, along with their corosponding line numbers.
+    lines: 123 & 124 - 
+                // watch showH4 useState for change
+                // watch showInfo useState for change
+
+*/
