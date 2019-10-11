@@ -135,7 +135,7 @@ export default function NasaImage() {
     the comments were being rendered in the html. Rather than remove them completely,
     I've moved them here, along with their corosponding line numbers.
     lines: 123 & 124 - 
-                // watch showH4 useState for change
+                // watch showH4   useState for change
                 // watch showInfo useState for change
 
 */
